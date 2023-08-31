@@ -116,7 +116,7 @@
         android:autofillHints="Confirm Password"
         android:hint="@string/confirm_password"
         android:inputType="textPassword"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
         android:textColorHint="#00796B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.378"

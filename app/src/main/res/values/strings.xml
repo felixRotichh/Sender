@@ -37,4 +37,5 @@
     <string name="receiver_name">Receiver Name</string>
     <string name="parcel_id">Parcel ID</string>
     <string name="location">Location</string>
+    <string name="delete">Delete</string>
 </resources>
