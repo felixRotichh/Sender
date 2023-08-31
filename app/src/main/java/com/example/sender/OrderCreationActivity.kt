@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class OrderCreationActivity : AppCompatActivity() {
 
@@ -16,14 +19,14 @@ class OrderCreationActivity : AppCompatActivity() {
     private lateinit var emailAddress: EditText
     private lateinit var countryCityTown: EditText
     private lateinit var createButton: Button
-
-    // creating a variable for our
-    // Firebase Database.
+    // Creating a variable for our Firebase Database.
     private var firebaseDatabase: FirebaseDatabase? = null
 
-    // creating a variable for our Database
-    // Reference for Firebase.
+    // Creating a variable for our Database Reference for Firebase.
     private var databaseReference: DatabaseReference? = null
+
+    private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +34,16 @@ class OrderCreationActivity : AppCompatActivity() {
 
         // Initialize Firebase Database
         firebaseDatabase = FirebaseDatabase.getInstance()
-        // Reference to "orders" node in Firebase
-        databaseReference = firebaseDatabase?.getReference("orders")
+
+        // Initialize Firebase Authentication
+        auth = Firebase.auth
+
+        // Get the current user's ID (you would get this from Firebase Authentication)
+        val userId = "user_id_here" // Replace with the actual user's ID
+
+        // Reference to "orders" node under the user's node
+        databaseReference = firebaseDatabase?.getReference("orders")?.child(userId)
+
 
         receiverName = findViewById(R.id.nameEditText)
         idNo = findViewById(R.id.editText14)
@@ -49,12 +60,11 @@ class OrderCreationActivity : AppCompatActivity() {
             val email = emailAddress.text.toString()
             val location = countryCityTown.text.toString()
 
-
-            // Create an com.example.sender.Order object to store the data
+            // Create an Order object to store the data
             val order = Order(name, id, phone, email, location)
 
             // Push the order data to Firebase
-            databaseReference?.push()?.setValue(order)
+            databaseReference?.push()?.setValue(order.toMap()) // Use the toMap() function here
 
             // Clear the input fields
             receiverName.text.clear()
@@ -63,8 +73,7 @@ class OrderCreationActivity : AppCompatActivity() {
             emailAddress.text.clear()
             countryCityTown.text.clear()
 
-
-            // Create an Intent to navigate to ContentCreationActivity
+            // Create an Intent to navigate to ContentOrderCreationActivity
             val intent = Intent(this@OrderCreationActivity, ContentOrderCreationActivity::class.java)
             startActivity(intent)
         }
@@ -84,5 +93,16 @@ data class Order(
             // You can use a unique identifier generator or timestamp
             return "PARCEL_${System.currentTimeMillis()}"
         }
+    }
+        // using map function for easy serialization and deserialization from database
+    fun toMap(): Map<String, Any?> {
+        return mapOf(
+            "receiverName" to receiverName,
+            "idNo" to idNo,
+            "phoneNumber" to phoneNumber,
+            "emailAddress" to emailAddress,
+            "countryCityTown" to countryCityTown,
+            "parcelId" to parcelId
+        )
     }
 }

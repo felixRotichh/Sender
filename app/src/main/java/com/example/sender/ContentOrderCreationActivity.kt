@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 class ContentOrderCreationActivity : AppCompatActivity() {
     private lateinit var orderButton: ImageButton
     private lateinit var profileImageView: ImageView
+    private lateinit var imageButton: ImageButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +20,12 @@ class ContentOrderCreationActivity : AppCompatActivity() {
 
         orderButton = findViewById(R.id.orderButton)
         profileImageView = findViewById(R.id.profileImage)
+        imageButton = findViewById(R.id.imageButton13)
+
+        imageButton.setOnClickListener{
+            val intent = Intent(this@ContentOrderCreationActivity, OrderListActivity::class.java )
+            startActivity(intent)
+        }
 
         profileImageView.setOnClickListener{
             val intent = Intent(this@ContentOrderCreationActivity, ProfileActivity::class.java)

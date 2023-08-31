@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textViewReceiverName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/receiver_name"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewParcelId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/parcel_id" />
+
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location" />
+
+    <!-- Add more TextViews for other order information -->
+
+</LinearLayout>

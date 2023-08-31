@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,7 +9,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
     <application
@@ -21,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sender"
         tools:targetApi="31">
-
+        <activity
+            android:name=".OrderListActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,28 +36,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".OrderCreationActivity"
+        <activity
+            android:name=".OrderCreationActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat"/>
-
-        <activity android:name=".ProfileActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".ProfileActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat"/>
-
-        <activity android:name=".ContentOrderCreationActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".ContentOrderCreationActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat"/>
-
-        <activity android:name=".RegistrationActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".RegistrationActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat"/>
-
-        <activity android:name=".SigninActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".SigninActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat"/>
-
-
+            android:theme="@style/Theme.AppCompat" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -65,7 +67,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" /> <!-- Create a new XML resource file for paths -->
         </provider>
-
-
     </application>
+
 </manifest>

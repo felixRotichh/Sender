@@ -34,4 +34,7 @@
     <string name="action_settings">Settings</string>
     <string name="don_t_have_account">Don\'t Have Account?</string>
     <string name="passwordUser">Password</string>
+    <string name="receiver_name">Receiver Name</string>
+    <string name="parcel_id">Parcel ID</string>
+    <string name="location">Location</string>
 </resources>
