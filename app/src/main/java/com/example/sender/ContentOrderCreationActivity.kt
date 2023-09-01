@@ -2,6 +2,8 @@ package com.example.sender
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -38,5 +40,21 @@ class ContentOrderCreationActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                // Handle the settings menu item click here
+                SettingsActivity() // You should create a function to open your settings activity
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
 }
