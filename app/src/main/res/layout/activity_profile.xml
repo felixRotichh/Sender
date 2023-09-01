@@ -35,7 +35,7 @@
         android:id="@+id/firstName"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="48dp"
         android:enabled="false"
         android:text="@string/first_name"
         android:textColor="@color/black"
@@ -49,7 +49,7 @@
         android:id="@+id/secondName"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="48dp"
         android:enabled="false"
         android:text="@string/last_name"
         android:textColor="@color/black"
@@ -63,7 +63,7 @@
         android:id="@+id/emailTextView"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:enabled="false"
         android:text="@string/email_Address"
         android:textColor="@color/black"
@@ -86,5 +86,17 @@
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailTextView" />
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/logout"
+        android:textColor="#fff"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,8 @@ class ProfileActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("ProfileActivity", "ProfileActivity opened")
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
@@ -40,6 +42,19 @@ class ProfileActivity : AppCompatActivity() {
 
         // Initialize Firebase Realtime Database
         userReference = FirebaseDatabase.getInstance().reference.child("users").child(auth.currentUser?.uid ?: "")
+
+        val sharedPreferencesHelper = SharedPreferencesHelper(this)
+
+        // Read the authentication status from SharedPreferences
+        val authStatus = sharedPreferencesHelper.getString("authStatus", "loggedOut")
+
+        if (authStatus == "loggedIn") {
+            val i = Intent(this@ProfileActivity, ContentOrderCreationActivity::class.java)
+            startActivity(i)
+            finish()
+        } else {
+            // Redirect to the login or registration activity
+        }
 
 
         getContentLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -87,6 +102,25 @@ class ProfileActivity : AppCompatActivity() {
         changeImageButton.setOnClickListener {
             showImagePickerDialog()
         }
+
+        val logoutButton: Button = findViewById(R.id.logoutButton)
+        logoutButton.setOnClickListener {
+            logoutUser()
+        }
+    }
+
+    private fun logoutUser() {
+        // Sign out the user using Firebase Authentication
+        FirebaseAuth.getInstance().signOut()
+
+        // Update shared preferences to indicate the user is logged out
+        val sharedPreferencesHelper = SharedPreferencesHelper(this)
+        sharedPreferencesHelper.saveString("authStatus", "loggedOut") // Corrected method
+
+        // Redirect to the login or registration activity
+        val intent = Intent(this@ProfileActivity, SigninActivity::class.java)
+        startActivity(intent)
+        finish() // Close the profile activity
     }
 
     private fun displayUserDetails(user: User, userSnapshot: DataSnapshot) {
@@ -100,6 +134,7 @@ class ProfileActivity : AppCompatActivity() {
         emailTextView.text = userSnapshot.child("emailAddress").getValue(String::class.java)
         phoneNumberTextView.text = user.phoneNumber
     }
+
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun showImagePickerDialog() {

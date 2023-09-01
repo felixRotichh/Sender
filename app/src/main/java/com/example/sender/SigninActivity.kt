@@ -41,24 +41,44 @@ class SigninActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        }
+        // Initialize com.example.sender.SharedPreferencesHelper after the login button click
+        val sharedPreferencesHelper = SharedPreferencesHelper(this)
+        val authStatus = sharedPreferencesHelper.getString("authStatus", "loggedOut")
 
-     private fun login() {
+        if (authStatus == "loggedIn") {
+            val i = Intent(this@SigninActivity, ContentOrderCreationActivity::class.java)
+            startActivity(i)
+            finish() // Optional: Finish the SigninActivity to prevent going back to it
+        } else {
+            //
+        }
+    }
+
+
+    private fun login() {
         val email = etEmail.text.toString()
         val pass = etPass.text.toString()
+
+        if (email.isBlank() || pass.isBlank()) {
+            Toast.makeText(this, "Email and password must be filled", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         // calling signInWithEmailAndPassword(email, pass)
         // function using Firebase auth object
         // On successful response Display a Toast
 
-        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
-        if (it.isSuccessful) {
-            val i = Intent(this@SigninActivity, ContentOrderCreationActivity::class.java)
-            startActivity(i)
-        } else
-            Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
+            if (task.isSuccessful) {
+                val i = Intent(this@SigninActivity, ContentOrderCreationActivity::class.java)
+                startActivity(i)
+            } else {
+                Toast.makeText(this, "Log In failed", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
-
 }
+
+
+
+

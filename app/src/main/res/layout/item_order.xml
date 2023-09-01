@@ -1,35 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/textViewReceiverName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/receiver_name"
-        android:textStyle="bold" />
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
 
     <TextView
         android:id="@+id/textViewParcelId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/parcel_id" />
+        android:textColor="@color/black"
+        android:text="@string/parcel_id"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
 
     <TextView
         android:id="@+id/textViewLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/location" />
+        android:text="@string/location"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:background="@drawable/rounded_button"
+        android:minHeight="48dp"
         android:text="@string/delete"
-        android:background="@color/redColor"/>
+        android:textColor="#fff"
+        android:textSize="16sp" />
+
 
 </LinearLayout>

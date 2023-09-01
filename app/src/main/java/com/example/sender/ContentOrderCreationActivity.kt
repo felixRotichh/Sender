@@ -32,6 +32,7 @@ class ContentOrderCreationActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         orderButton.setOnClickListener {
             val intent = Intent(this@ContentOrderCreationActivity, OrderCreationActivity::class.java)
             startActivity(intent)

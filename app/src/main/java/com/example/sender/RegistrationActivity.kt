@@ -46,7 +46,6 @@ class RegistrationActivity : AppCompatActivity() {
 
         // Set click listener for sign-up button
         btnSignUp.setOnClickListener {
-            Log.d("RegistrationActivity", "Sign-up button clicked")
             signUpUser()
         }
     }
@@ -61,6 +60,7 @@ class RegistrationActivity : AppCompatActivity() {
         val phoneNumberValue = phoneNumber.text.toString()
         val firstNameValue = fname.text.toString()
         val lastNameValue = lname.text.toString()
+        val sharedPreferencesHelper = SharedPreferencesHelper(this)
 
         // Check if fields are empty
         if (email.isBlank() || pass.isBlank() || confirmPassword.isBlank() ||
@@ -77,18 +77,25 @@ class RegistrationActivity : AppCompatActivity() {
             return
         }
 
+        // Validate email format
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        if (!email.matches(emailPattern.toRegex())) {
+            Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Create user in Firebase Authentication
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) { task ->
-            Log.d("RegistrationActivity", "createUserWithEmailAndPassword() onComplete called")
             if (task.isSuccessful) {
-                Log.d("RegistrationActivity", "User registration successful")
 
                 val user = auth.currentUser
+                // After the user is successfully registered or logged in, save their authentication status
+                sharedPreferencesHelper.saveString("authStatus", "loggedIn")
+
 
                 // If the user is authenticated successfully, save additional details to the database
                 user?.let {
                     val userId = user.uid // Get the user ID
-                    Log.d("RegistrationActivity", "User ID: $userId")
 
                     // Reference to the user's node in the "users" section of the Firebase Realtime Database
                     val userReference =
@@ -116,9 +123,9 @@ class RegistrationActivity : AppCompatActivity() {
                     }
                 }
             } else {
+                // Handle registration failure
                 if (task.exception is FirebaseAuthUserCollisionException) {
-                    Toast.makeText(this, "The email address is already in use.", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, "The email address is already in use.", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
                 }

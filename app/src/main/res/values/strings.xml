@@ -38,4 +38,6 @@
     <string name="parcel_id">Parcel ID</string>
     <string name="location">Location</string>
     <string name="delete">Delete</string>
+    <string name="logout">Logout</string>
+    <string name="orders">Orders</string>
 </resources>
